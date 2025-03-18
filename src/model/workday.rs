@@ -1,3 +1,4 @@
+use crate::utils::log;
 use chrono::{DateTime, Duration, Local};
 
 pub struct Workday {
@@ -23,5 +24,15 @@ impl Workday {
             entry_time: entry_time.clone(),
             end_time: Self::calculate_end_time(entry_time),
         }
+    }
+
+    pub fn log(&self) -> std::io::Result<()> {
+        let log_message = format!(
+            "Date: {}, Entry time: {}, End time: {}",
+            self.date.format("%Y, %B %d"),
+            self.entry_time,
+            self.end_time.format("%H:%M")
+        );
+        log::log_to_file(log_message)
     }
 }

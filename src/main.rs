@@ -1,3 +1,4 @@
+mod utils;
 mod model;
 
 fn main() {
